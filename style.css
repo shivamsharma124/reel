@@ -33,6 +33,7 @@ section{
     overflow: auto;
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
+    border-radius: 10px;
 
    
 }
@@ -44,7 +45,7 @@ section{
 {
     height: 100%;
     width: 100%;
-    background-color: greenyellow;
+    /* background-color: greenyellow; */
     position: relative;
     margin-bottom: 20px;
     overflow: hidden;
@@ -131,7 +132,10 @@ section{
     justify-content: center;
     align-items: center;
     gap: 5px;
+    width: 50px;
+    cursor: pointer;
 }
+
 .right h4
 {
     cursor: pointer;
@@ -139,4 +143,38 @@ section{
 .love
 {
     color: red;
+}
+.right>div>h4
+{
+    pointer-events: none;
+
+}
+.right>div>h6
+{
+    pointer-events: none;
+
+}
+.muted
+{
+    background-color:#7c7a7a;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    position:absolute;
+    top: 1%;
+    right: 3%;
+
+}
+.muted:active
+{
+    scale:0.95;
+}
+.muted i{
+    pointer-events: none;
+    font-size: 22px;
 }

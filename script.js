@@ -1,5 +1,7 @@
 const reels= [
   {
+    
+    ismuted:true,
     username: "priya_sharma",
     userProfilePhoto: "https://randomuser.me/api/portraits/women/1.jpg",
     video: "one.mp4",
@@ -11,6 +13,8 @@ const reels= [
     isShared: false
   },
   {
+    
+    ismuted:true,
     username: "rahul.fitness",
     userProfilePhoto: "https://randomuser.me/api/portraits/men/2.jpg",
     video: "two.mp4",
@@ -22,6 +26,8 @@ const reels= [
     isShared: false
   },
   {
+    
+    ismuted:true,
     username: "foodie_neha",
     userProfilePhoto: "https://randomuser.me/api/portraits/women/3.jpg",
     video: "three.mp4",
@@ -33,6 +39,8 @@ const reels= [
     isShared: true
   },
   {
+    
+    ismuted:true,
     username: "travel_with_arjun",
     userProfilePhoto: "https://randomuser.me/api/portraits/men/4.jpg",
     video: "four.mp4",
@@ -44,6 +52,8 @@ const reels= [
     isShared: true
   },
   {
+    
+    ismuted:true,
     username: "dance.with.kavya",
     userProfilePhoto: "https://randomuser.me/api/portraits/women/5.jpg",
     video: "five.mp4",
@@ -55,6 +65,8 @@ const reels= [
     isShared: false
   },
   {
+    
+    ismuted:true,
     username: "tech_guy_rohan",
     userProfilePhoto: "https://randomuser.me/api/portraits/men/6.jpg",
     video: "six.mp4",
@@ -66,6 +78,8 @@ const reels= [
     isShared: false
   },
   {
+    
+    ismuted:true,
     username: "meera.art_studio",
     userProfilePhoto: "https://randomuser.me/api/portraits/women/7.jpg",
     video: "seven.mp4",
@@ -77,6 +91,8 @@ const reels= [
     isShared: false
   },
   {
+    
+    ismuted:true,
     username: "chef_vikram",
     userProfilePhoto: "https://randomuser.me/api/portraits/men/8.jpg",
     video: "eight.mp4",
@@ -88,6 +104,8 @@ const reels= [
     isShared: true
   },
   {
+    
+    ismuted:true,
     username: "ananya.lifestyle",
     userProfilePhoto: "https://randomuser.me/api/portraits/women/9.jpg",
     video: "nine.mp4",
@@ -99,6 +117,8 @@ const reels= [
     isShared: false
   },
   {
+    
+    ismuted:true,
     username: "comedy_with_karan",
     userProfilePhoto: "https://randomuser.me/api/portraits/men/10.jpg",
     video: "ten.mp4",
@@ -110,28 +130,35 @@ const reels= [
     isShared: true
   }
 ];
-let sum='';
-reels.forEach(function(elem)
+var all_reels=document.querySelector('.all_reel')
+var count_like=document.querySelector('#count_like')
+
+function addData()
+{
+  let sum='';
+reels.forEach(function(elem,idx)
 {
     sum=sum+`<div class="one_reel">
-                       <video autoplay loop muted src="${elem.video}"></video>
+                <video autoplay loop ${elem.ismuted?'muted':''} src="${elem.video}"></video>
+                                                   <button  id=${idx} class="muted">${elem.ismuted?'<i class="ri-volume-mute-line"></i>':'<i class="ri-volume-up-fill"></i>'}</button>
+
                 <div class="bottom">
                  <div class="user">
                        
                     <img src="${elem.userProfilePhoto}" alt="">
                     <h4>${elem.username}</h4>
-                    <button>${elem.isShared?'Unfolow':'Folow'}</button>
+                    <button id=${idx} class='follow'>${elem.isShared?'Unfolow':'Folow'}</button>
                  </div>
                         <div>
                     <h3>${elem.caption}</h3>
                         </div>
                     </div>
                     <div class="right">
-                    <div class="like">
+                    <div id=${idx} class="like">
                         <h4>${elem.isLiked?'<i class="ri-heart-3-fill love"></i>':'<i class="ri-heart-3-line"></i>'}</h4>
-                        <h6>${elem.likeCount}</h6>
+                        <h6 id ="count_like" >${elem.likeCount}</h6>
                     </div>
-                    <div class="comment">
+                    <div  class="comment">
                         <h4><i class="ri-chat-3-line"></i></h4>
                         <h6>${elem.commentCount}</h6>
                     </div>
@@ -150,6 +177,61 @@ reels.forEach(function(elem)
 
     
 })
-var all_reels=document.querySelector('.all_reel')
 all_reels.innerHTML=sum;
+}
+addData();
+all_reels.addEventListener('click', function(dets)
+{
+    
+  if(dets.target.className=='like')
+  {
+    
+  if(reels[dets.target.id].isLiked)
+  {
+ reels[ dets.target.id].likeCount--;
+  reels[ dets.target.id].isLiked=false;
+   addData();
+  }
+  else{
+    reels[ dets.target.id].likeCount++;
+  reels[ dets.target.id].isLiked=true;
+   addData();
+
+  }
+  }
+if(dets.target.className=='follow')
+{
+  if(reels[dets.target.id].isShared)
+  {
+    reels[dets.target.id].isShared=false;
+     addData();
+
+  }
+  else{
+    reels[dets.target.id].isShared=true;
+     addData();
+  }
+}
+if(dets.target.className=='muted')
+{
+  if(reels[dets.target.id].ismuted)
+  {
+    reels[dets.target.id].ismuted=false;
+    
+    addData();
+
+
+  }
+  else{
+    reels[dets.target.id].ismuted=true;
+    addData();
+  }
+  
+
+}
+
+
+
+
+})
 
